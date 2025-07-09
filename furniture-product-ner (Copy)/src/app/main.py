@@ -46,5 +46,5 @@ async def extract(request: Request, url: str = Form(...)):
         "request": request,
         "products": products,
         "url": url,
-        "text": text[:2000]  # Показываем первые 2000 символов страницы
+        "text": text[:2000]  
     })
