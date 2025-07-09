@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # coding: utf-8
 """
-00_prepare_data.py — конвертация данных Label Studio в HF Dataset для NER
+00_prepare_data.py — Convert Label Studio data to HF Dataset for NER
 """
 
 from pathlib import Path
@@ -38,8 +38,7 @@ def tokenize_and_align_labels(example, tokenizer):
         inside = False
         for i, (tok_start, tok_end) in enumerate(offsets):
             if tok_end == 0 and tok_start == 0:
-                continue  # CLS/SEP
-            # Если токен пересекается с сущностью
+                continue 
             if max(tok_start, start) < min(tok_end, end):
                 if not inside:
                     labels[i] = "B-PRODUCT"
@@ -72,7 +71,7 @@ def main():
         "validation": Dataset.from_list(val_features),
     })
     ds.save_to_disk(str(OUT_PATH))
-    print("Данные сохранены в", OUT_PATH)
+    print("Data is saved in", OUT_PATH)
 
 if __name__ == "__main__":
     main()
