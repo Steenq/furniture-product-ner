@@ -11,11 +11,11 @@ MODEL = "xlm-roberta-base"
 LABELS = ["O", "B-PRODUCT", "I-PRODUCT"]
 NUM_LABELS = len(LABELS)
 
-# 1. Загружаем токенизатор и датасет
+# 1. Downloading tokenizer and dataset
 ds = load_from_disk("data/processed")
 tokenizer = AutoTokenizer.from_pretrained(MODEL)
 
-# 2. Загружаем модель для NER, настраиваем метки
+# 2. Loading the model for NER, setting up labels
 model = AutoModelForTokenClassification.from_pretrained(
     MODEL,
     num_labels=NUM_LABELS,
@@ -23,7 +23,7 @@ model = AutoModelForTokenClassification.from_pretrained(
     label2id={l: i for i, l in enumerate(LABELS)},
 )
 
-# 3. Параметры обучения
+# 3. Training parameters
 args = TrainingArguments(
     output_dir="models/product_ner",
     per_device_train_batch_size=8,
@@ -36,7 +36,7 @@ args = TrainingArguments(
     logging_steps=20,
 )
 
-# 4. Trainer — основной класс Hugging Face для обучения
+# 4. Trainer
 trainer = Trainer(
     model=model,
     args=args,
@@ -46,12 +46,12 @@ trainer = Trainer(
     data_collator=DataCollatorForTokenClassification(tokenizer),
 )
 
-# 5. Запускаем обучение
+# 5. Launching training
 trainer.train()
 
-# 6. Сохраняем модель (чтобы использовать потом в пайплайне)
+# 6. Saving model
 trainer.save_model("models/product_ner")
 
-# 7. Печатаем метрики
+# 7. Printing metrics
 metrics = trainer.evaluate()
 print("Metrics:", metrics)
