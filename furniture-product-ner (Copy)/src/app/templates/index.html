@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Extracting products from furniture sites</title>
+    <style>
+        body { font-family: sans-serif; max-width: 700px; margin: 40px auto; }
+        input[type="text"] { width: 80%; padding: 8px; }
+        button { padding: 8px 16px; }
+        ul { margin-top: 1.5em; }
+        .debug { color: #888; font-size: 0.9em; margin-top: 1em; }
+    </style>
+</head>
+<body>
+    <h1>Extracting products from furniture sites</h1>
+    <form method="post">
+        <input type="text" name="url" value="{{ url }}" placeholder="Paste the URL of the product page" required />
+        <button type="submit">Extract products</button>
+    </form>
+    {% if products is not none %}
+        <h2>Products found:</h2>
+        {% if products %}
+            <ul>
+                {% for p in products %}
+                    <li>{{ p }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No products found on this page.</p>
+        {% endif %}
+        <details>
+            <summary>Show page text</summary>
+            <pre class="debug">{{ text | e }}</pre>
+        </details>
+    {% endif %}
+</body>
+</html>

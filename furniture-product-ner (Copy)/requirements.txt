@@ -1,0 +1,11 @@
+fastapi[all]
+uvicorn
+transformers>=4.41
+datasets
+seqeval
+trafilatura
+beautifulsoup4
+lxml
+tqdm
+requests
+aiohttp
