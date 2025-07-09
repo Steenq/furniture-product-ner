@@ -1,1 +1,2 @@
-😇
+model is there on google disk because of the large size:
+https://drive.google.com/drive/folders/1LzSFjmLo0pUFIJALaK8njFI8rfQ5HIon?hl=ru
